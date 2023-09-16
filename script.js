@@ -13,10 +13,10 @@ window.onload = function() {
 	];
 	
 	const bounds = {
-    left: 0,
-    right: window.innerWidth,
-    top: 0,
-    bottom: window.innerHeight
+    		left: 0,
+    		right: window.innerWidth,
+    		top: 0,
+    		bottom: window.innerHeight
 	};
 	
 	// Function to generate a random time between 1 to 2 seconds
@@ -31,7 +31,7 @@ window.onload = function() {
 	}
 
 	// Function to set a random position for a phrase element
-     function setRandomPosition(phraseElement) {
+     	function setRandomPosition(phraseElement) {
 		const maxX = bounds.right - phraseElement.offsetWidth;
 		const maxY = bounds.bottom - phraseElement.offsetHeight;
 
