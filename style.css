@@ -1,0 +1,13 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevents scrolling */
+}
+
+.centered-text {
+    position: absolute;
+    font-weight: bold;
+    font-size: 2em;
+    transform: translate(-50%, -50%);
+}
