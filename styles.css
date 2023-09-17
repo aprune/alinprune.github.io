@@ -1,18 +1,48 @@
 body, html {
     height: 100%;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Bahnschrift, Bahnschrift;
     overflow: hidden; /* Prevents scrolling */
     position: relative; /* Relative positioning context for the text */
 }
 
-.centered-text, #phrasesContainer div {
+/* Styles for the animated text */
+#phrasesContainer div, .centered-text {
     position: absolute;
     font-weight: bold;
     font-size: 2em;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-	opacity: 0;
+    opacity: 0;
     transition: opacity 0.5s ease-out; /* 0.5s is the duration of the fade effect */
+}
+
+/* Styles for the menu */
+#menuContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px; /* Adjust width as needed */
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* Shadow on the left side */
+    overflow-y: auto; /* Scrollable if the menu is too long */
+}
+
+#menuContainer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#menuContainer li {
+    margin-bottom: 10px;
+}
+
+#menuContainer a {
+    text-decoration: none;
+    color: #333; /* Adjust color as needed */
+    font-weight: bold;
+}
+
+#menuContainer a:hover {
+    color: #555; /* Adjust hover color as needed */
 }
