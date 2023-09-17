@@ -1,14 +1,41 @@
+
+
 // Our "database" of phrases
 const phrases = [
     	"Sa ma sugi Cosmine.",
-		"Horse",
-		"Work in progres.",
-		"Lil bro stupid.",
+		"Horse","Ha ha",
+		"Work in progres.","something","something else","if you read this you gay", 
+		"Lil bro stupid.","ce sugem?",
 		"Ce mai astepti?","poate ti se pare dubios","dar","muie",
 		"Horse...",
-		"ney","ney?","ney",
+		"ney","ney?","ney","ney","ney?","ney!","ney","ney?","ney"
     // ... other phrases ...
 ];
+
+
+
+// Utility functions
+function getRandomTime() {
+    return Math.random() * 2000 + 4000;
+}
+
+function setRandomPosition(phraseElement) {
+    const dynamicMargin = 2 * phraseElement.innerText.length;
+    const totalMarginX = fixedMargin + dynamicMargin;
+    const totalMarginY = fixedMargin + dynamicMargin;
+
+    const x = Math.random() * (bounds.right - phraseElement.offsetWidth - totalMarginX) + totalMarginX;
+    const y = Math.random() * (bounds.bottom - phraseElement.offsetHeight - totalMarginY) + totalMarginY;
+
+    phraseElement.style.left = x + 'px';
+    phraseElement.style.top = y + 'px';
+}
+
+const colorScale = chroma.scale(['lightblue', 'pink','purple']);
+
+function getRandomColorFromScale() {
+    return colorScale(Math.random()).alpha(1).saturate(1).darken(1).hex();
+}
 
 // Define the fixed margin
 const fixedMargin = 100;
@@ -27,40 +54,35 @@ window.addEventListener('resize', function() {
     document.querySelectorAll('#phrasesContainer div').forEach(setRandomPosition);
 });
 
-// Utility functions
-function getRandomTime() {
-    return Math.random() * 2000 + 2000;
-}
 
-function setRandomPosition(phraseElement) {
-    const dynamicMargin = 2 * phraseElement.innerText.length;
-    const totalMarginX = fixedMargin + dynamicMargin;
-    const totalMarginY = fixedMargin + dynamicMargin;
-
-    const x = Math.random() * (bounds.right - phraseElement.offsetWidth - totalMarginX) + totalMarginX;
-    const y = Math.random() * (bounds.bottom - phraseElement.offsetHeight - totalMarginY) + totalMarginY;
-
-    phraseElement.style.left = x + 'px';
-    phraseElement.style.top = y + 'px';
-}
+// Duration of the fade effect in milliseconds
+const FADE_DURATION = 2000; 
 
 // Initialization
 window.onload = function() {
+	
+	let cumulativeDelay = 0; // Start with no delay
+	
     phrases.forEach(phraseText => {
         const phraseElement = document.createElement('div');
         phraseElement.innerText = phraseText;
         phraseElement.className = 'phrase'; // Apply the CSS class
+		phraseElement.style.color = getRandomColorFromScale(); // Set the random color
 
         document.getElementById('phrasesContainer').appendChild(phraseElement);
         setRandomPosition(phraseElement); 
 
-        setTimeout(() => phraseElement.style.opacity = 1, getRandomTime());
-        setInterval(() => {
-            phraseElement.style.opacity = 0;
-            setTimeout(() => {
-                setRandomPosition(phraseElement);
-                phraseElement.style.opacity = 1;
+        cumulativeDelay += getRandomTime(); // Increase the delay for the next phrase
+
+        setTimeout(() => {
+            phraseElement.style.opacity = 1;
+            setInterval(() => {
+                phraseElement.style.opacity = 0;
+                setTimeout(() => {
+                    setRandomPosition(phraseElement);
+                    phraseElement.style.opacity = 1;
+                }, FADE_DURATION); // Wait for the fade-out to complete before repositioning
             }, getRandomTime());
-        }, getRandomTime());
+        }, cumulativeDelay); // Use the cumulative delay here
     });
 };
