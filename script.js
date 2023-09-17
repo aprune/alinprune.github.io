@@ -1,4 +1,4 @@
-window.onload = function() {
+
 	// Our "database" of phrases
 	const phrases = [
 		"Sa ma sugi Cosmine.",
@@ -12,16 +12,29 @@ window.onload = function() {
 		// ... add more phrases as needed
 	];
 	
+	//define the margine from the edge of the page
+	const margin = 50;
+	
+	//defines bounds with a margin
 	const bounds = {
-    		left: 0,
-    		right: window.innerWidth,
-    		top: 0,
-    		bottom: window.innerHeight
+    left: margin,
+    right: window.innerWidth - margin,
+    top: margin,
+    bottom: window.innerHeight - margin
 	};
 	
-	// Function to generate a random time between 1 to 2 seconds
+	window.addEventListener('resize', function() {
+    // Update the bounds based on the new viewport size
+    bounds.right = window.innerWidth;
+    bounds.bottom = window.innerHeight;
+
+    // Reposition all the text elements
+    document.querySelectorAll('#phrasesContainer div').forEach(setRandomPosition);
+	});
+	
+	// Function to generate a random time between 2 to 4 seconds
 	function getRandomTime() {
-		return Math.random() * 2000 + 2000; // 1000 to 2000 milliseconds
+		return Math.random() * 2000 + 2000; // 2000 to 4000 milliseconds
 	}
 
 	function fadeInPhrase(phraseElement) {
@@ -31,16 +44,18 @@ window.onload = function() {
 	}
 
 	// Function to set a random position for a phrase element
-     	function setRandomPosition(phraseElement) {
-		const maxX = bounds.right - phraseElement.offsetWidth;
-		const maxY = bounds.bottom - phraseElement.offsetHeight;
+     function setRandomPosition(phraseElement) {
+		const dynamicMargin = 5 * phraseElement.innerText.length; // additional margin based on text length
+		
+		const maxX = bounds.right - phraseElement.offsetWidth - dynamicMargin;
+		const maxY = bounds.bottom - phraseElement.offsetHeight - dynamicMargin;
 
-		const x = Math.random() * (maxX - bounds.left) + bounds.left;
-		const y = Math.random() * (maxY - bounds.top) + bounds.top;
+		const x = Math.random() * (maxX - bounds.left - dynamicMargin) + bounds.left + dynamicMargin;
+		const y = Math.random() * (maxY - bounds.top - dynamicMargin) + bounds.top + dynamicMargin;
 
 		phraseElement.style.left = x + 'px';
 		phraseElement.style.top = y + 'px';
-    }
+	}
 
 	// Function to move and fade a phrase element
 	function moveAndFadePhrase(phraseElement) {
@@ -75,4 +90,4 @@ window.onload = function() {
 		// Move and fade the phrase at random intervals
 		setInterval(() => moveAndFadePhrase(phraseElement), getRandomTime());
 	});
-};
+
