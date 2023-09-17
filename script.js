@@ -90,3 +90,4 @@
 		// Move and fade the phrase at random intervals
 		setInterval(() => moveAndFadePhrase(phraseElement), getRandomTime());
 	});
+
