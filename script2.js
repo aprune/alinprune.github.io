@@ -3,7 +3,7 @@
 // Our "database" of phrases
 const phrases = [
     	"Sa ma sugi Cosmine.",
-		"Horse","Ha ha",
+		"Ha ha","Horse",
 		"Work in progres.","something","something else","if you read this you gay", 
 		"Lil bro stupid.","ce sugem?",
 		"Ce mai astepti?","poate ti se pare dubios","dar","muie",
@@ -72,8 +72,8 @@ window.onload = function() {
         document.getElementById('phrasesContainer').appendChild(phraseElement);
         setRandomPosition(phraseElement); 
 
-        cumulativeDelay += getRandomTime(); // Increase the delay for the next phrase
-
+        cumulativeDelay += getRandomTime()/3; // Increase the delay for the next phrase
+		console.log(cumulativeDelay); // Outputs: "I'm function-scoped!"
         setTimeout(() => {
             phraseElement.style.opacity = 1;
             setInterval(() => {
@@ -86,3 +86,12 @@ window.onload = function() {
         }, cumulativeDelay); // Use the cumulative delay here
     });
 };
+
+document.getElementById('menuTab').addEventListener('click', function() {
+    const menuWrapper = document.getElementById('menuWrapper');
+    if (menuWrapper.classList.contains('active')) {
+        menuWrapper.classList.remove('active');
+    } else {
+        menuWrapper.classList.add('active');
+    }
+});

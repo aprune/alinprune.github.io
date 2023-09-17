@@ -12,22 +12,48 @@ body, html {
     font-weight: bold;
     font-size: 2em;
     opacity: 0;
-    transition: opacity 1s ease-out; /* 0.5s is the duration of the fade effect */
+    transition: opacity 1s ease-out;
 }
 
-/* Styles for the menu */
-#menuContainer {
+/* Style for the menu wrapper */
+#menuWrapper {
     position: fixed;
     top: 0;
-    right: 0;
-    width: 200px; /* Adjust width as needed */
+    right: -200px; /* Start hidden off the right edge of the screen */
+    width: 200px;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    padding: 20px;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* Shadow on the left side */
-    overflow-y: auto; /* Scrollable if the menu is too long */
+    z-index: 1000; /* Ensure it's below the tab but above other content */
+    transition: right 0.3s ease;
 }
 
+#menuWrapper.active {
+    right: 0; /* Slide in from the right when active */
+}
+
+/* Style for the menu tab */
+#menuTab {
+    position: absolute;
+    left: -80px; /* Position to the left of the #menuWrapper */
+    top: 0; /* Position at the top edge of the #menuWrapper */
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 1001; /* Ensure it's above the menu */
+}
+
+/* Style for the popup menu */
+#menuContainer {
+    position: absolute;
+    top: 0;
+    right: 0; /* Position at the right edge of the wrapper */
+    width: 200px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1;
+}
+
+/* Styles for the menu content */
 #menuContainer ul {
     list-style-type: none;
     padding: 0;
@@ -39,10 +65,10 @@ body, html {
 
 #menuContainer a {
     text-decoration: none;
-    color: #333; /* Adjust color as needed */
+    color: #333;
     font-weight: bold;
 }
 
 #menuContainer a:hover {
-    color: #555; /* Adjust hover color as needed */
+    color: #555;
 }
